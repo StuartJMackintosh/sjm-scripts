@@ -1,0 +1,12 @@
+<?xml encoding="UTF-8" version="1.0"?>
+<actions>
+<action>
+	<icon></icon>
+	<name>Tag photo</name>
+	<unique-id>1558791900738670-1</unique-id>
+	<command>/srv/fileshare/scripts/tag-photos.sh %F</command>
+	<description>Add tag</description>
+	<patterns>*.jpg;*.JPG;*.jpeg;*.JPEG</patterns>
+	<image-files/>
+</action>
+</actions>
