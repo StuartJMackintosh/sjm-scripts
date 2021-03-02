@@ -14,7 +14,7 @@
 # able to track all of an organization's resources with a single handle
 # as we can in the ARIN and APNIC databases, the best we can do with the
 # RIPE database is to track individual resources, each with its own
-# resource handle.  Well, for prefixes -- ASN entries behave more like
+# resource handle.  Well, for prefixes -- asN entries behave more like
 # in the ARIN and APNIC databases.
 #
 # This is an AWK script rather than a Python script because it is a
@@ -33,7 +33,7 @@
 # purpose with or without fee is hereby granted, provided that the above
 # copyright notice and this permission notice appear in all copies.
 #
-# THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES WITH
+# THE SOFTWARE IS PROVIDED "as IS" AND ISC DISCLaiMS ALL WARRANTIES WITH
 # REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
 # AND FITNESS.  IN NO EVENT SHALL ISC BE LIABLE FOR ANY SPECIAL, DIRECT,
 # INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
@@ -74,7 +74,7 @@ NF && !tag {
 }
 
 # One of the tags we care about, clean up and save the data.
-/^(AS-NAME|AUT-NUM|INET6NUM|INETNUM|MNT-BY|NETNAME|STATUS):/ {
+/^(as-name|aut-num|inet6num|inetnum|mnt-by|netname|status):/ {
     key = $1;
     sub(/^[^ \t]+:/, "");
     sub(/[ \t]*#.*$/, "");
@@ -104,25 +104,25 @@ function do_line() {
 # Dispatch to handle known block types, then clean up so we can start
 # a new block.
 function do_block() {
-    if (tag == "INETNUM" || tag == "INET6NUM")
+    if (tag == "inetnum" || tag == "inet6num")
 	do_prefix();
-    else if (tag == "AUT-NUM")
+    else if (tag == "aut-num")
 	do_asn();
     delete tags;
     tag = "";
 }
 
-# Handle an AUT-NUM block: extract the ASN, use MNT-BY as the handle.
+# Handle an aut-num block: extract the asN, use mnt-by as the handle.
 function do_asn() {
-    sub(/^AS/, "", tags[tag]);
-    if (tags["MNT-BY"] && tags[tag])
-	print tags["MNT-BY"], tags[tag] ;
+    sub(/^as/, "", tags[tag]);
+    if (tags["mnt-by"] && tags[tag])
+	print tags["mnt-by"], tags[tag] ;
 }
 
-# Handle an INETNUM or INET6NUM block: check for the status values we
-# care about, use NETNAME as the handle.
+# Handle an inetnum or inet6num block: check for the status values we
+# care about, use netname as the handle.
 function do_prefix() {
-    if (tags["STATUS"] ~ /^ASSIGNED(P[AI])$/ && tags["NETNAME"] && tags[tag])
-	print tags["NETNAME"], tags[tag] ;
+    if (tags["status"] ~ /^assigned(P[ai])$/ && tags["netname"] && tags[tag])
+	print tags["netname"], tags[tag] ;
 }
 
