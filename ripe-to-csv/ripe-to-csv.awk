@@ -116,13 +116,13 @@ function do_block() {
 function do_asn() {
     sub(/^AS/, "", tags[tag]);
     if (tags["MNT-BY"] && tags[tag])
-	print tags["MNT-BY"], tags[tag] >"asns.csv";
+	print tags["MNT-BY"], tags[tag] ;
 }
 
 # Handle an INETNUM or INET6NUM block: check for the status values we
 # care about, use NETNAME as the handle.
 function do_prefix() {
     if (tags["STATUS"] ~ /^ASSIGNED(P[AI])$/ && tags["NETNAME"] && tags[tag])
-	print tags["NETNAME"], tags[tag] >"prefixes.csv";
+	print tags["NETNAME"], tags[tag] ;
 }
 
