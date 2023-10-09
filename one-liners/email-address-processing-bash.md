@@ -5,7 +5,7 @@
 
 ## Email addresses from file
 
-FNAME=email-addresses.txt; sed -r 's/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/\n&\n/ig;s/(^|\n)[^@]*(\n|$)/\n/g;s/^\n|\n$//g;/^$/d' ${FNAME}  | sort -u > clean-${FNAME}
+FNAME=email-addresses.txt; sed -r 's/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/\n&\n/ig;s/(^|\n)[^@]*(\n|$)/\n/g;s/^\n|\n$//g;/^$/d' ${FNAME}  | sort -u > ${FNAME}-clean
 
 ## domain names from email addresses
 
