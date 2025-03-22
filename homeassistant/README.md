@@ -7,6 +7,8 @@ There are SDKs and scripts demanding node, python, the Tapo online app etc.
 
 This is the simplest method I could find with least depenadancies and no requirement for the cloud account.
 
+> Note: pan/tilt works, soom doesn't
+
 # To install
 
 ## bash script
@@ -109,21 +111,5 @@ entities:
     tap_action:
       action: call-service
       service: shell_command.ptz_right
-  - entity: camera.c200_mainstream
-    icon: mdi:eye-outline
-    tap_action:
-      action: call-service
-      service: onvif.set_privacy_mode
-      service_data:
-        entity_id: camera.c200_mainstream
-        privacy_mode: "off"
-  - entity: camera.c200_mainstream
-    icon: mdi:eye-off-outline
-    tap_action:
-      action: call-service
-      service: onvif.set_privacy_mode
-      service_data:
-        entity_id: camera.c200_mainstream
-        privacy_mode: "on"
 ```
 
